@@ -1,7 +1,6 @@
 package tests;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -37,8 +36,8 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void test2inputTypesCheck() {
-        Assert.assertTrue(loginPage.getEmailFieldTypeValue().equals("email"));
-        Assert.assertTrue(loginPage.getPasswordFieldTypeValue().equals("password"));
+        Assert.assertEquals(loginPage.getEmailFieldTypeValue(), "email");
+        Assert.assertEquals(loginPage.getPasswordFieldTypeValue(),"password");
     }
 
     @Test
@@ -47,7 +46,19 @@ public class LoginTests extends BaseTest {
         String password = faker.internet().password();
         loginPage.login(email, password);
         String expectedErrorMessage = "User does not exists";
-        String actualErrorMessage = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li")).getText();
-        Assert.assertTrue(expectedErrorMessage.equals(actualErrorMessage));
+        String actualErrorMessage = loginPage.getLoginErrorMessageText();
+        Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
     }
+
+    @Test
+    public void test4wrongPasswordErrorMessageCheck() {
+        String email = "admin@admin.com";
+        String password = faker.internet().password();
+        loginPage.login(email, password);
+        String expectedErrorMessage = "Wrong password";
+        String actualErrorMessage = loginPage.getLoginErrorMessageText();
+        Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
+    }
+
+
 }
