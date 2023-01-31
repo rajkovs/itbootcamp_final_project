@@ -30,4 +30,12 @@ public class LoginPage extends BasePage {
 
         loginButton.click();
     }
+
+    public String getEmailFieldTypeValue(){
+        return emailField.getAttribute("type");
+    }
+
+    public String getPasswordFieldTypeValue(){
+        return passwordField.getAttribute("type");
+    }
 }
