@@ -6,11 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LandingPage {
-
-    private WebDriver driver;
-
-    private WebDriverWait driverWait;
+public class LandingPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/header/div/div[3]/a[3]")
     private WebElement loginOption;
@@ -22,9 +18,7 @@ public class LandingPage {
     private WebElement locale;
 
     public LandingPage(WebDriver driver, WebDriverWait driverWait) {
-        this.driver = driver;
-        this.driverWait = driverWait;
-        PageFactory.initElements(this.driver, this);
+        super(driver, driverWait);
     }
 
     public void openLoginPage(){

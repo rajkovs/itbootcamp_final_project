@@ -6,11 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
-
-    private WebDriver driver;
-
-    private WebDriverWait driverWait;
+public class LoginPage extends BasePage {
 
     @FindBy(name = "email")
     private WebElement emailField;
@@ -22,9 +18,7 @@ public class LoginPage {
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver, WebDriverWait driverWait) {
-        this.driver = driver;
-        this.driverWait = driverWait;
-        PageFactory.initElements(this.driver, this);
+        super(driver, driverWait);
     }
 
     public void login(String email, String password) {
