@@ -6,12 +6,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.HomePage;
-import pages.LandingPage;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
 
-    private LandingPage landingPage;
     private LoginPage loginPage;
 
     private HomePage homePage;
@@ -25,7 +23,6 @@ public class LoginTests extends BaseTest {
     @BeforeClass
     public void beforeClass() {
         super.beforeClass();
-        landingPage = new LandingPage(driver, driverWait);
         loginPage = new LoginPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
         faker = new Faker();
