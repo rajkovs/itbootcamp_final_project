@@ -4,10 +4,7 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.HomePage;
 import pages.LandingPage;
 import pages.LoginPage;
@@ -59,8 +56,6 @@ public class LoginTests extends BaseTest {
         String expectedErrorMessage = "User does not exists";
         String actualErrorMessage = loginPage.getLoginErrorMessageText();
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
-
-        homePage.logoutUser();
     }
 
     @Test
@@ -84,13 +79,21 @@ public class LoginTests extends BaseTest {
     public void test6Logout() {
         loginPage.login(VALIDEMAIL, VALIDPASSWORD);
         Assert.assertTrue(driver.findElement(By.className("btnLogout")).isDisplayed());
+        homePage.logoutUser();
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
+
+        driver.get(baseURL + "/home");
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
 
-    @AfterClass
-    public void afterClass(){
-        if(driver.findElement(By.className("btnLogout")).isDisplayed()){
-            homePage.logoutUser();
+    @AfterMethod
+    public void afterMethod() {
+        try {
+            if(driver.findElement(By.className("btnLogout")).isDisplayed()){
+                homePage.logoutUser();
+            }
+        } catch (Exception NoSuchElementException) {
+            System.out.println("User not signed in/no logout button found.");
         }
-        super.afterClass();
     }
 }
