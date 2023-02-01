@@ -32,15 +32,15 @@ public class LoginPage extends PublicPage {
         loginButton.click();
     }
 
-    public String getEmailFieldTypeValue(){
+    public String getEmailFieldTypeValue() {
         return emailField.getAttribute("type");
     }
 
-    public String getPasswordFieldTypeValue(){
+    public String getPasswordFieldTypeValue() {
         return passwordField.getAttribute("type");
     }
 
-    public String getLoginErrorMessageText(){
+    public String getLoginErrorMessageText() {
         return loginErrorMessage.getText();
     }
 }

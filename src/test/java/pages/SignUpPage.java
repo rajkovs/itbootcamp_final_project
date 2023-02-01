@@ -26,12 +26,24 @@ public class SignUpPage extends PublicPage {
         super(driver, driverWait);
     }
 
-    public void signUpUser(String name, String email, String password, String confirmPassword){
+    public void signUpUser(String name, String email, String password, String confirmPassword) {
         nameInputField.sendKeys(name);
         emailInputField.sendKeys(email);
         passwordInputField.sendKeys(password);
         confirmPasswordInputField.sendKeys(confirmPassword);
 
         signMeUpButton.click();
+    }
+
+    public String getEmailFieldTypeValue() {
+        return emailInputField.getAttribute("type");
+    }
+
+    public String getPasswordFieldTypeValue() {
+        return passwordInputField.getAttribute("type");
+    }
+
+    public String getConfirmPasswordFieldTypeValue() {
+        return confirmPasswordInputField.getAttribute("type");
     }
 }

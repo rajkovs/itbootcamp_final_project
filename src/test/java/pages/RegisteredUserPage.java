@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class RegisteredUserPage extends BasePage{
+public abstract class RegisteredUserPage extends BasePage {
 
     @FindBy(className = "btnLogout")
     protected WebElement logoutToolbarOption;
@@ -14,7 +14,7 @@ public abstract class RegisteredUserPage extends BasePage{
         super(driver, driverWait);
     }
 
-    public void logoutUser(){
+    public void logoutUser() {
         logoutToolbarOption.click();
     }
 }

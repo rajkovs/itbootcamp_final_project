@@ -42,7 +42,7 @@ public class LoginTests extends BaseTest {
     @Test
     public void test2InputTypesCheck() {
         Assert.assertEquals(loginPage.getEmailFieldTypeValue(), "email");
-        Assert.assertEquals(loginPage.getPasswordFieldTypeValue(),"password");
+        Assert.assertEquals(loginPage.getPasswordFieldTypeValue(), "password");
     }
 
     @Test
@@ -86,7 +86,7 @@ public class LoginTests extends BaseTest {
     @AfterMethod
     public void afterMethod() {
         try {
-            if(driver.findElement(By.className("btnLogout")).isDisplayed()){
+            if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
                 homePage.logoutUser();
             }
         } catch (Exception NoSuchElementException) {

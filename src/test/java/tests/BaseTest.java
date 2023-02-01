@@ -20,7 +20,7 @@ public abstract class BaseTest {
     protected final String baseURL = "https://vue-demo.daniel-avellaneda.com";
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "D:\\ChromeWebDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driverWait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -29,7 +29,7 @@ public abstract class BaseTest {
     }
 
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         driver.get(baseURL);
     }
 
