@@ -1,11 +1,14 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.HomePage;
 import pages.LandingPage;
 import pages.LoginPage;
 
@@ -14,6 +17,12 @@ public class LoginTests extends BaseTest {
     private LandingPage landingPage;
     private LoginPage loginPage;
 
+    private HomePage homePage;
+
+    private final String VALIDEMAIL = "admin@admin.com";
+
+    private final String VALIDPASSWORD = "12345";
+
     private Faker faker;
 
     @BeforeClass
@@ -21,6 +30,7 @@ public class LoginTests extends BaseTest {
         super.beforeClass();
         landingPage = new LandingPage(driver, driverWait);
         loginPage = new LoginPage(driver, driverWait);
+        homePage = new HomePage(driver, driverWait);
         faker = new Faker();
     }
 
@@ -49,13 +59,14 @@ public class LoginTests extends BaseTest {
         String expectedErrorMessage = "User does not exists";
         String actualErrorMessage = loginPage.getLoginErrorMessageText();
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
+
+        homePage.logoutUser();
     }
 
     @Test
     public void test4WrongPasswordErrorMessageCheck() {
-        String email = "admin@admin.com";
         String password = faker.internet().password();
-        loginPage.login(email, password);
+        loginPage.login(VALIDEMAIL, password);
 
         String expectedErrorMessage = "Wrong password";
         String actualErrorMessage = loginPage.getLoginErrorMessageText();
@@ -64,10 +75,22 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void test5ValidCredentialsLogin() {
-        String email = "admin@admin.com";
-        String password = "12345";
-        loginPage.login(email, password);
+        loginPage.login(VALIDEMAIL, VALIDPASSWORD);
         driverWait.until(ExpectedConditions.urlContains("/home"));
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/home"));
+    }
+
+    @Test
+    public void test6Logout() {
+        loginPage.login(VALIDEMAIL, VALIDPASSWORD);
+        Assert.assertTrue(driver.findElement(By.className("btnLogout")).isDisplayed());
+    }
+
+    @AfterClass
+    public void afterClass(){
+        if(driver.findElement(By.className("btnLogout")).isDisplayed()){
+            homePage.logoutUser();
+        }
+        super.afterClass();
     }
 }
