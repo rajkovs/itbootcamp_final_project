@@ -19,6 +19,10 @@ public abstract class BaseTest {
 
     protected final String baseURL = "https://vue-demo.daniel-avellaneda.com";
 
+    protected final String VALIDEMAIL = "admin@admin.com";
+
+    protected final String VALIDPASSWORD = "12345";
+
     @BeforeClass
     public void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "D:\\ChromeWebDriver\\chromedriver.exe");

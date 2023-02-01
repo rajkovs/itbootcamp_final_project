@@ -14,10 +14,6 @@ public class LoginTests extends BaseTest {
 
     private HomePage homePage;
 
-    private final String VALIDEMAIL = "admin@admin.com";
-
-    private final String VALIDPASSWORD = "12345";
-
     private Faker faker;
 
     @BeforeClass
