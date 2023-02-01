@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -30,18 +31,18 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void test1loginPageVisitVerification() {
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
+    public void test1LoginPageVisitVerification() {
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
 
     @Test
-    public void test2inputTypesCheck() {
+    public void test2InputTypesCheck() {
         Assert.assertEquals(loginPage.getEmailFieldTypeValue(), "email");
         Assert.assertEquals(loginPage.getPasswordFieldTypeValue(),"password");
     }
 
     @Test
-    public void test3nonExistingUserErrorMessageCheck() {
+    public void test3NonExistingUserErrorMessageCheck() {
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
         loginPage.login(email, password);
@@ -51,14 +52,22 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void test4wrongPasswordErrorMessageCheck() {
+    public void test4WrongPasswordErrorMessageCheck() {
         String email = "admin@admin.com";
         String password = faker.internet().password();
         loginPage.login(email, password);
+
         String expectedErrorMessage = "Wrong password";
         String actualErrorMessage = loginPage.getLoginErrorMessageText();
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
     }
 
-
+    @Test
+    public void test5ValidCredentialsLogin() {
+        String email = "admin@admin.com";
+        String password = "12345";
+        loginPage.login(email, password);
+        driverWait.until(ExpectedConditions.urlContains("/home"));
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/home"));
+    }
 }

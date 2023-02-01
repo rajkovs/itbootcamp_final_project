@@ -3,10 +3,9 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LandingPage extends BasePage {
+public class LandingPage extends PublicPage {
 
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/header/div/div[3]/a[3]")
     private WebElement loginOption;
@@ -19,13 +18,5 @@ public class LandingPage extends BasePage {
 
     public LandingPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
-    }
-
-    public void openLoginPage(){
-        loginOption.click();
-    }
-
-    public void openSignUpPage(){
-        signUpOption.click();
     }
 }
