@@ -2,6 +2,7 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.AdminCitiesPage;
@@ -18,6 +19,8 @@ public class AdminCitiesTests extends BaseTest {
 
     private Faker faker;
 
+    private String cityName;
+
     @BeforeClass
     public void beforeClass() {
         super.beforeClass();
@@ -31,23 +34,46 @@ public class AdminCitiesTests extends BaseTest {
     public void beforeMethod() {
         super.beforeMethod();
         landingPage.openLoginPage();
-    }
-
-    @Test
-    public void test1VisitAdminCitiesPageAndListCities(){
         loginPage.login(VALIDEMAIL, VALIDPASSWORD);
         homePage.openCities();
+    }
+
+
+    @Test
+    public void test1VisitAdminCitiesPageAndListCities() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
         Assert.assertTrue(adminCitiesPage.logoutToolbarOptionDisplayed());
     }
 
     @Test
-    public void test2CreateNewCity(){
-        loginPage.login(VALIDEMAIL, VALIDPASSWORD);
-        homePage.openCities();
-        String cityName = faker.address().cityName();
+    public void test2CreateNewCity() {
+        cityName = faker.address().cityName();
+
         adminCitiesPage.createNewCity(cityName);
         Assert.assertTrue(adminCitiesPage.getSuccessfulMessageText().contains("Saved successfully"));
+    }
+
+    @Test(dependsOnMethods = {"test2CreateNewCity"})
+    public void test3SearchCities() {
+        adminCitiesPage.searchCities(cityName);
+
+        String firstResultCityName = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")).getText();
+        Assert.assertEquals(firstResultCityName, cityName);
+    }
+
+    @Test(dependsOnMethods = {"test3SearchCities"})
+    public void test4EditCity() {
+        adminCitiesPage.editCityName(cityName, cityName + " edited");
+    }
+
+    @Test(dependsOnMethods = {"test4EditCity"})
+    public void test5DeleteCity() {
+        adminCitiesPage.searchCities(cityName);
+        driverWait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr"), 1));
+        String firstResultCityName = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")).getText();
+        Assert.assertTrue(firstResultCityName.contains(cityName));
+        adminCitiesPage.deleteCity(cityName);
+        Assert.assertTrue(adminCitiesPage.getSuccessfulDeleteMessage().contains("Deleted successfully"));
     }
 
     @AfterMethod
