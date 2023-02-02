@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,5 +27,10 @@ public abstract class PublicPage extends BasePage {
 
     public void openSignUpPage() {
         signUpToolbarOption.click();
+    }
+
+    public void setLocaleToolbarOption(LocaleOptions chosenLocale) {
+        localeToolbarOption.click();
+        driver.findElement(By.className("btn" + chosenLocale)).click();
     }
 }
