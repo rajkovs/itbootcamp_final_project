@@ -1,19 +1,25 @@
 package tests;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.HomePage;
 import pages.SignUpPage;
 
 public class SignUpTests extends BaseTest{
 
     private SignUpPage signUpPage;
 
+    private HomePage homePage;
+
     @BeforeClass
     public void beforeClass(){
         super.beforeClass();
         signUpPage = new SignUpPage(driver, driverWait);
+        homePage = new HomePage(driver, driverWait);
     }
 
     @BeforeMethod
@@ -51,5 +57,16 @@ public class SignUpTests extends BaseTest{
         String confirmPassword = "notAPassword_123";
         signUpPage.signUpUser(name, email, password, confirmPassword);
         Assert.assertEquals(signUpPage.getSuccessfulSignUpMessage(), "IMPORTANT: Verify your account");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        try {
+            if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
+                homePage.logoutUser();
+            }
+        } catch (Exception NoSuchElementException) {
+            System.out.println("User not signed in/no logout button found.");
+        }
     }
 }

@@ -14,6 +14,9 @@ public abstract class RegisteredUserPage extends BasePage {
     @FindBy(className = "btnAdmin")
     protected WebElement adminToolbarOption;
 
+    @FindBy(className = "btnProfile")
+    protected WebElement myProfileToolbarOption;
+
     public RegisteredUserPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
@@ -29,5 +32,9 @@ public abstract class RegisteredUserPage extends BasePage {
     public void openCities(){
         adminToolbarOption.click();
         driver.findElement(By.className("btnAdminCities")).click();
+    }
+
+    public void openProfile(){
+        myProfileToolbarOption.click();
     }
 }

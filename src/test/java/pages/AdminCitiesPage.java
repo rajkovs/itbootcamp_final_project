@@ -50,7 +50,7 @@ public class AdminCitiesPage extends RegisteredUserPage {
     }
 
     public String getSuccessfulDeleteMessage() {
-        driverWait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(successfulDeleteMessage, " Deleted successfully")));
+        driverWait.until(ExpectedConditions.textToBePresentInElement(successfulDeleteMessage, "Deleted successfully"));
         return successfulDeleteMessage.getText();
     }
 

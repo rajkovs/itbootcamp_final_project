@@ -29,6 +29,9 @@ public class SignUpPage extends PublicPage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[4]/div/div/div[1]")
     private WebElement successfulSignUpMessage;
 
+    @FindBy(className = "btnClose")
+    private WebElement closeButtonSuccessfulSignUpMessage;
+
     public SignUpPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
@@ -61,5 +64,9 @@ public class SignUpPage extends PublicPage {
     public String getSuccessfulSignUpMessage(){
         driverWait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(successfulSignUpMessage, "Please wait...")));
         return successfulSignUpMessage.getText();
+    }
+
+    public void closeSignUpMessage(){
+        closeButtonSuccessfulSignUpMessage.click();
     }
 }
