@@ -29,12 +29,12 @@ public abstract class RegisteredUserPage extends BasePage {
         return logoutToolbarOption.isDisplayed();
     }
 
-    public void openCities(){
+    public void openCities() {
         adminToolbarOption.click();
         driver.findElement(By.className("btnAdminCities")).click();
     }
 
-    public void openProfile(){
+    public void openProfile() {
         myProfileToolbarOption.click();
     }
 }

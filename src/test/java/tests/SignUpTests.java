@@ -9,39 +9,39 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.SignUpPage;
 
-public class SignUpTests extends BaseTest{
+public class SignUpTests extends BaseTest {
 
     private SignUpPage signUpPage;
 
     private HomePage homePage;
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         super.beforeClass();
         signUpPage = new SignUpPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
     }
 
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         super.beforeMethod();
         landingPage.openSignUpPage();
     }
 
     @Test
-    public void test1SignUpPageVisit(){
+    public void test1SignUpPageVisit() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("signup"));
     }
 
     @Test
-    public void test2CheckInputTypes(){
+    public void test2CheckInputTypes() {
         Assert.assertEquals(signUpPage.getEmailFieldTypeValue(), "email");
         Assert.assertEquals(signUpPage.getPasswordFieldTypeValue(), "password");
         Assert.assertEquals(signUpPage.getConfirmPasswordFieldTypeValue(), "password");
     }
 
     @Test
-    public void test3ExistingUserErrorMessageCheck(){
+    public void test3ExistingUserErrorMessageCheck() {
         String name = "Test Test";
         String password = "123654";
         String confirmPassword = "123654";
@@ -50,7 +50,7 @@ public class SignUpTests extends BaseTest{
     }
 
     @Test
-    public void test4ValidInputSignUp(){
+    public void test4ValidInputSignUp() {
         String name = "Sasa Rajkov";
         String email = "testemail@testing.rs";
         String password = "notAPassword_123";

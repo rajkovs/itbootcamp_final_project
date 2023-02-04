@@ -61,12 +61,12 @@ public class SignUpPage extends PublicPage {
         return signUpErrorMessage.getText();
     }
 
-    public String getSuccessfulSignUpMessage(){
+    public String getSuccessfulSignUpMessage() {
         driverWait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(successfulSignUpMessage, "Please wait...")));
         return successfulSignUpMessage.getText();
     }
 
-    public void closeSignUpMessage(){
+    public void closeSignUpMessage() {
         closeButtonSuccessfulSignUpMessage.click();
     }
 }

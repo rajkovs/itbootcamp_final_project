@@ -2,6 +2,7 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -41,6 +42,7 @@ public class ProfileTests extends BaseTest {
         landingPage.openSignUpPage();
         signUpPage.signUpUser(name, email, password, confirmPassword);
         signUpPage.closeSignUpMessage();
+        driverWait.until(ExpectedConditions.urlToBe(baseURL + "/home"));
     }
 
     @Test
@@ -57,6 +59,7 @@ public class ProfileTests extends BaseTest {
         Assert.assertTrue(myProfilePage.getSuccessfulSaveEditMessage().contains("Profile saved successfuly"));
 
         driver.navigate().refresh();
+        driverWait.until(ExpectedConditions.textToBePresentInElementValue(By.id("email"), email));
 
         Assert.assertEquals(myProfilePage.getCurrentName(), name);
         Assert.assertEquals(myProfilePage.getCurrentPhone(), phone);
