@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
 
+import java.lang.reflect.Method;
+
 public class ProfileTests extends BaseTest {
 
     private SignUpPage signUpPage;
@@ -70,13 +72,13 @@ public class ProfileTests extends BaseTest {
     }
 
     @AfterMethod
-    public void afterMethod() {
+    public void afterMethod(Method method) {
         try {
             if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
                 homePage.logoutUser();
             }
         } catch (Exception NoSuchElementException) {
-            System.out.println("User not signed in/no logout button found.");
+            System.out.println(method.getName() + " afterMethod - logout:\nUser not signed in/no logout button found.");
         }
     }
 

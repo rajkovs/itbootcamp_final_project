@@ -9,6 +9,8 @@ import pages.AdminCitiesPage;
 import pages.HomePage;
 import pages.LoginPage;
 
+import java.lang.reflect.Method;
+
 public class AdminCitiesTests extends BaseTest {
 
     private LoginPage loginPage;
@@ -34,7 +36,7 @@ public class AdminCitiesTests extends BaseTest {
     public void beforeMethod() {
         super.beforeMethod();
         landingPage.openLoginPage();
-        loginPage.login(VALIDEMAIL, VALIDPASSWORD);
+        loginPage.login(ADMINEMAIL, ADMINPASSWORD);
         homePage.openCities();
     }
 
@@ -77,13 +79,13 @@ public class AdminCitiesTests extends BaseTest {
     }
 
     @AfterMethod
-    public void afterMethod() {
+    public void afterMethod(Method method) {
         try {
             if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
                 homePage.logoutUser();
             }
         } catch (Exception NoSuchElementException) {
-            System.out.println("User not signed in/no logout button found.");
+            System.out.println(method.getName() + " afterMethod - logout:\nUser not signed in/no logout button found.");
         }
     }
 }

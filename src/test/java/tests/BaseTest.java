@@ -11,6 +11,7 @@ import pages.LandingPage;
 import java.time.Duration;
 
 public abstract class BaseTest {
+
     protected WebDriver driver;
 
     protected WebDriverWait driverWait;
@@ -19,9 +20,9 @@ public abstract class BaseTest {
 
     protected final String baseURL = "https://vue-demo.daniel-avellaneda.com";
 
-    protected final String VALIDEMAIL = "admin@admin.com";
+    protected final String ADMINEMAIL = "admin@admin.com";
 
-    protected final String VALIDPASSWORD = "12345";
+    protected final String ADMINPASSWORD = "12345";
 
     @BeforeClass
     public void beforeClass() {

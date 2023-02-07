@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.SignUpPage;
 
+import java.lang.reflect.Method;
+
 public class SignUpTests extends BaseTest {
 
     private SignUpPage signUpPage;
@@ -45,7 +47,7 @@ public class SignUpTests extends BaseTest {
         String name = "Test Test";
         String password = "123654";
         String confirmPassword = "123654";
-        signUpPage.signUpUser(name, VALIDEMAIL, password, confirmPassword);
+        signUpPage.signUpUser(name, ADMINEMAIL, password, confirmPassword);
         Assert.assertEquals(signUpPage.getSignUpErrorMessageText(), "E-mail already exists");
     }
 
@@ -60,13 +62,13 @@ public class SignUpTests extends BaseTest {
     }
 
     @AfterMethod
-    public void afterMethod() {
+    public void afterMethod(Method method) {
         try {
             if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
                 homePage.logoutUser();
             }
         } catch (Exception NoSuchElementException) {
-            System.out.println("User not signed in/no logout button found.");
+            System.out.println(method.getName() + " afterMethod - logout:\nUser not signed in/no logout button found.");
         }
     }
 }

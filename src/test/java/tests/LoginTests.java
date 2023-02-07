@@ -8,6 +8,8 @@ import org.testng.annotations.*;
 import pages.HomePage;
 import pages.LoginPage;
 
+import java.lang.reflect.Method;
+
 public class LoginTests extends BaseTest {
 
     private LoginPage loginPage;
@@ -54,7 +56,7 @@ public class LoginTests extends BaseTest {
     @Test
     public void test4WrongPasswordErrorMessageCheck() {
         String password = faker.internet().password();
-        loginPage.login(VALIDEMAIL, password);
+        loginPage.login(ADMINEMAIL, password);
 
         String expectedErrorMessage = "Wrong password";
         String actualErrorMessage = loginPage.getLoginErrorMessageText();
@@ -63,14 +65,14 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void test5ValidCredentialsLogin() {
-        loginPage.login(VALIDEMAIL, VALIDPASSWORD);
+        loginPage.login(ADMINEMAIL, ADMINPASSWORD);
         driverWait.until(ExpectedConditions.urlContains("/home"));
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/home"));
     }
 
     @Test
     public void test6Logout() {
-        loginPage.login(VALIDEMAIL, VALIDPASSWORD);
+        loginPage.login(ADMINEMAIL, ADMINPASSWORD);
         Assert.assertTrue(driver.findElement(By.className("btnLogout")).isDisplayed());
         homePage.logoutUser();
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
@@ -80,13 +82,13 @@ public class LoginTests extends BaseTest {
     }
 
     @AfterMethod
-    public void afterMethod() {
+    public void afterMethod(Method method) {
         try {
             if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
                 homePage.logoutUser();
             }
         } catch (Exception NoSuchElementException) {
-            System.out.println("User not signed in/no logout button found.");
+            System.out.println(method.getName() + " afterMethod - logout:\nUser not signed in/no logout button found.");
         }
     }
 }
