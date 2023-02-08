@@ -41,34 +41,34 @@ public class AdminCitiesTests extends BaseTest {
 
 
     @Test
-    public void test1VisitAdminCitiesPageAndListCities() {
+    public void VisitAdminCitiesPageAndListCities() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
         Assert.assertTrue(adminCitiesPage.logoutToolbarOptionDisplayed());
     }
 
     @Test
-    public void test2CreateNewCity() {
+    public void CreateNewCity() {
         cityName = faker.address().cityName();
 
         adminCitiesPage.createNewCity(cityName);
         Assert.assertTrue(adminCitiesPage.getSuccessfulMessageText().contains("Saved successfully"));
     }
 
-    @Test(dependsOnMethods = {"test2CreateNewCity"})
-    public void test3SearchCities() {
+    @Test(dependsOnMethods = {"CreateNewCity"})
+    public void SearchCities() {
         adminCitiesPage.searchCities(cityName);
 
         String firstResultCityName = adminCitiesPage.getSearchResultsFirstCityName();
         Assert.assertEquals(firstResultCityName, cityName);
     }
 
-    @Test(dependsOnMethods = {"test3SearchCities"})
-    public void test4EditCity() {
+    @Test(dependsOnMethods = {"SearchCities"})
+    public void EditCity() {
         adminCitiesPage.editCityName(cityName, cityName + " edited");
     }
 
-    @Test(dependsOnMethods = {"test4EditCity"})
-    public void test5DeleteCity() {
+    @Test(dependsOnMethods = {"EditCity"})
+    public void DeleteCity() {
         adminCitiesPage.searchCities(cityName);
         adminCitiesPage.waitUntilOneSearchResult();
 

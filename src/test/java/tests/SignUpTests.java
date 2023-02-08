@@ -31,19 +31,19 @@ public class SignUpTests extends BaseTest {
     }
 
     @Test
-    public void test1SignUpPageVisit() {
+    public void SignUpPageVisit() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("signup"));
     }
 
     @Test
-    public void test2CheckInputTypes() {
+    public void CheckInputTypes() {
         Assert.assertEquals(signUpPage.getEmailFieldTypeValue(), "email");
         Assert.assertEquals(signUpPage.getPasswordFieldTypeValue(), "password");
         Assert.assertEquals(signUpPage.getConfirmPasswordFieldTypeValue(), "password");
     }
 
     @Test
-    public void test3ExistingUserErrorMessageCheck() {
+    public void ExistingUserErrorMessageCheck() {
         String name = "Test Test";
         String password = "123654";
         String confirmPassword = "123654";
@@ -52,7 +52,7 @@ public class SignUpTests extends BaseTest {
     }
 
     @Test
-    public void test4ValidInputSignUp() {
+    public void ValidInputSignUp() {
         String name = "Sasa Rajkov";
         String email = "testemail@testing.rs";
         String password = "notAPassword_123";

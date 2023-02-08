@@ -19,10 +19,7 @@ public class ProfileTests extends BaseTest {
     private MyProfilePage myProfilePage;
 
     private Faker faker;
-
-    private String name;
     private String email;
-    private String password;
 
     @BeforeClass
     public void beforeClass() {
@@ -36,9 +33,9 @@ public class ProfileTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod() {
         super.beforeMethod();
-        name = faker.name().fullName();
-        email = faker.internet().emailAddress();
-        password = faker.internet().password();
+        String name = faker.name().fullName();
+        String email = faker.internet().emailAddress();
+        String password = faker.internet().password();
         String confirmPassword = password;
 
         landingPage.openSignUpPage();
@@ -48,7 +45,7 @@ public class ProfileTests extends BaseTest {
     }
 
     @Test
-    public void test1EditProfile() {
+    public void EditProfile() {
         homePage.openProfile();
         String name = faker.name().fullName();
         String phone = faker.phoneNumber().phoneNumber();

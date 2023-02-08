@@ -33,18 +33,18 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void test1LoginPageVisitVerification() {
+    public void LoginPageVisitVerification() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
 
     @Test
-    public void test2InputTypesCheck() {
+    public void InputTypesCheck() {
         Assert.assertEquals(loginPage.getEmailFieldTypeValue(), "email");
         Assert.assertEquals(loginPage.getPasswordFieldTypeValue(), "password");
     }
 
     @Test
-    public void test3NonExistingUserErrorMessageCheck() {
+    public void NonExistingUserErrorMessageCheck() {
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
         loginPage.login(email, password);
@@ -54,7 +54,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void test4WrongPasswordErrorMessageCheck() {
+    public void WrongPasswordErrorMessageCheck() {
         String password = faker.internet().password();
         loginPage.login(ADMINEMAIL, password);
 
@@ -64,14 +64,14 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void test5ValidCredentialsLogin() {
+    public void ValidCredentialsLogin() {
         loginPage.login(ADMINEMAIL, ADMINPASSWORD);
         driverWait.until(ExpectedConditions.urlContains("/home"));
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/home"));
     }
 
     @Test
-    public void test6Logout() {
+    public void Logout() {
         loginPage.login(ADMINEMAIL, ADMINPASSWORD);
         Assert.assertTrue(driver.findElement(By.className("btnLogout")).isDisplayed());
         homePage.logoutUser();
