@@ -26,7 +26,6 @@ public abstract class BaseTest {
 
     @BeforeClass
     public void beforeClass() {
-        System.setProperty("webdriver.chrome.driver", "D:\\ChromeWebDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driverWait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));

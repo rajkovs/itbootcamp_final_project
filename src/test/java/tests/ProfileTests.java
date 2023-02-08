@@ -37,7 +37,7 @@ public class ProfileTests extends BaseTest {
     public void beforeMethod() {
         super.beforeMethod();
         String name = faker.name().fullName();
-        String email = faker.internet().emailAddress();
+        email = faker.internet().emailAddress();
         String password = faker.internet().password();
         String confirmPassword = password;
 
