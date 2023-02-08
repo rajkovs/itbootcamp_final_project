@@ -39,38 +39,48 @@ public class MyProfilePage extends RegisteredUserPage {
         super(driver, driverWait);
     }
 
+    public void fillNameField(String name) {
+        nameInputField.click();
+        nameInputField.sendKeys(Keys.CONTROL + "a");
+        nameInputField.sendKeys(name);
+    }
+
+    public void fillPhoneField(String phone) {
+        phoneInputField.click();
+        phoneInputField.sendKeys(Keys.CONTROL + "a");
+        phoneInputField.sendKeys(phone);
+    }
+
     public void selectCity(int cityIndex) {
+        cityInputField.click();
         List<WebElement> citiesList = driver.findElements(By.xpath("//*[@role = \"listbox\"]/div/div/div"));
         citiesList.get(cityIndex).click();
     }
 
-    public void editProfile(String name, String phone, int cityIndex, String country, String twitterURL, String gitHubURL) { //add city edit option
-        nameInputField.click();
-        nameInputField.sendKeys(Keys.CONTROL + "a");
-        nameInputField.sendKeys(Keys.DELETE);
-        nameInputField.sendKeys(name);
-
-        phoneInputField.click();
-        phoneInputField.sendKeys(Keys.CONTROL + "a");
-        phoneInputField.sendKeys(Keys.DELETE);
-        phoneInputField.sendKeys(phone);
-
+    public void fillCountryField(String country) {
         countryInputField.click();
         countryInputField.sendKeys(Keys.CONTROL + "a");
-        countryInputField.sendKeys(Keys.DELETE);
         countryInputField.sendKeys(country);
+    }
 
+    public void fillTwitterURL(String twitterURL) {
         twitterInputField.click();
         twitterInputField.sendKeys(Keys.CONTROL + "a");
-        twitterInputField.sendKeys(Keys.DELETE);
         twitterInputField.sendKeys(twitterURL);
+    }
 
+    public void fillGitHubURL(String gitHubURL) {
         gitHubInputField.click();
         gitHubInputField.sendKeys(Keys.CONTROL + "a");
-        gitHubInputField.sendKeys(Keys.DELETE);
         gitHubInputField.sendKeys(gitHubURL);
+    }
 
-        cityInputField.click();
+    public void editProfile(String name, String phone, int cityIndex, String country, String twitterURL, String gitHubURL) {
+        fillNameField(name);
+        fillPhoneField(phone);
+        fillCountryField(country);
+        fillTwitterURL(twitterURL);
+        fillGitHubURL(gitHubURL);
         selectCity(cityIndex);
     }
 
@@ -87,7 +97,6 @@ public class MyProfilePage extends RegisteredUserPage {
     }
 
     public String getCurrentPhone() {
-
         return phoneInputField.getAttribute("value");
     }
 
