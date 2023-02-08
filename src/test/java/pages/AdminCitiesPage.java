@@ -45,6 +45,10 @@ public class AdminCitiesPage extends RegisteredUserPage {
         searchField.sendKeys(Keys.ENTER);
     }
 
+    public String getSearchResultsFirstCityName() {
+        return driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")).getText();
+    }
+
     public String getSuccessfulMessageText() {
         return successfulMessage.getText();
     }
@@ -74,5 +78,9 @@ public class AdminCitiesPage extends RegisteredUserPage {
         searchCities(cityName);
         driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]/div/button[2]")).click();
         deleteCityButton.click();
+    }
+
+    public void waitUntilOneSearchResult(){
+        driverWait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr"), 1));
     }
 }

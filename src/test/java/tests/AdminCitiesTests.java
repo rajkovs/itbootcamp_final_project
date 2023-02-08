@@ -2,7 +2,6 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.AdminCitiesPage;
@@ -59,7 +58,7 @@ public class AdminCitiesTests extends BaseTest {
     public void test3SearchCities() {
         adminCitiesPage.searchCities(cityName);
 
-        String firstResultCityName = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")).getText();
+        String firstResultCityName = adminCitiesPage.getSearchResultsFirstCityName();
         Assert.assertEquals(firstResultCityName, cityName);
     }
 
@@ -71,8 +70,9 @@ public class AdminCitiesTests extends BaseTest {
     @Test(dependsOnMethods = {"test4EditCity"})
     public void test5DeleteCity() {
         adminCitiesPage.searchCities(cityName);
-        driverWait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr"), 1));
-        String firstResultCityName = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")).getText();
+        adminCitiesPage.waitUntilOneSearchResult();
+
+        String firstResultCityName = adminCitiesPage.getSearchResultsFirstCityName();
         Assert.assertTrue(firstResultCityName.contains(cityName));
         adminCitiesPage.deleteCity(cityName);
         Assert.assertTrue(adminCitiesPage.getSuccessfulDeleteMessage().contains("Deleted successfully"));
