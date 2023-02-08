@@ -15,10 +15,13 @@ import java.lang.reflect.Method;
 public class ProfileTests extends BaseTest {
 
     private SignUpPage signUpPage;
+
     private HomePage homePage;
+
     private MyProfilePage myProfilePage;
 
     private Faker faker;
+
     private String email;
 
     @BeforeClass
