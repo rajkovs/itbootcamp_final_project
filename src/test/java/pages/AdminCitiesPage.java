@@ -69,7 +69,6 @@ public class AdminCitiesPage extends RegisteredUserPage {
         searchCities(cityName);
         driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]/div/button[1]")).click();
         cityNameInputField.sendKeys(Keys.CONTROL + "a");
-        cityNameInputField.sendKeys(Keys.DELETE);
         cityNameInputField.sendKeys(newCityName);
         saveCityButton.click();
     }
