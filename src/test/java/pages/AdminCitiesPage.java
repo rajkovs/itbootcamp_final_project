@@ -39,6 +39,8 @@ public class AdminCitiesPage extends RegisteredUserPage {
     }
 
     public void searchCities(String searchText) {
+        searchField.sendKeys(Keys.CONTROL + "a");
+        searchField.sendKeys(Keys.DELETE);
         searchField.sendKeys(searchText);
         searchField.sendKeys(Keys.ENTER);
     }
