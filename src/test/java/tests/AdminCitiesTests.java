@@ -65,6 +65,8 @@ public class AdminCitiesTests extends BaseTest {
     @Test(dependsOnMethods = {"SearchCities"})
     public void EditCity() {
         adminCitiesPage.editCityName(cityName, cityName + " edited");
+
+        Assert.assertTrue(adminCitiesPage.getSuccessfulMessageText().contains("Saved successfully"));
     }
 
     @Test(dependsOnMethods = {"EditCity"})
