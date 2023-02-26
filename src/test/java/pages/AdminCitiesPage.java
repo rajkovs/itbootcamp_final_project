@@ -49,6 +49,10 @@ public class AdminCitiesPage extends RegisteredUserPage {
         return driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")).getText();
     }
 
+    public boolean successfulMessageIsDisplayed() {
+        return successfulMessage.isDisplayed();
+    }
+
     public String getSuccessfulMessageText() {
         return successfulMessage.getText();
     }
@@ -56,6 +60,10 @@ public class AdminCitiesPage extends RegisteredUserPage {
     public String getSuccessfulDeleteMessage() {
         driverWait.until(ExpectedConditions.textToBePresentInElement(successfulDeleteMessage, "Deleted successfully"));
         return successfulDeleteMessage.getText();
+    }
+
+    public void closeMessage() {
+        successfulMessage.findElement(By.tagName("button")).click();
     }
 
     public void createNewCity(String cityName) {
