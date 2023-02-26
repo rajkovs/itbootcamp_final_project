@@ -83,6 +83,13 @@ public class AdminCitiesTests extends BaseTest {
     @AfterMethod
     public void afterMethod(Method method) {
         try {
+            if (adminCitiesPage.successfulMessageIsDisplayed()) {
+                adminCitiesPage.closeMessage();
+            }
+        } catch (Exception NoSuchElementException) {
+            System.out.println(method.getName() + " afterMethod - close message:\nNo close message/Close message button not found.");
+        }
+        try {
             if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
                 homePage.logoutUser();
             }
