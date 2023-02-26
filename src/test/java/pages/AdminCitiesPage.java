@@ -19,13 +19,13 @@ public class AdminCitiesPage extends RegisteredUserPage {
     @FindBy(id = "name")
     private WebElement cityNameInputField;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]")
+    @FindBy(className = "btnSave")
     private WebElement saveCityButton;
 
     @FindBy(id = "btnCancel")
     private WebElement cancelNewCityButton;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]")
+    @FindBy(xpath = "//div[text()='Do you really want to delete this item?']/following-sibling::div/button[contains(.//span/text(),\" Delete \")]")
     private WebElement deleteCityButton;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
@@ -39,8 +39,6 @@ public class AdminCitiesPage extends RegisteredUserPage {
     }
 
     public void searchCities(String searchText) {
-        searchField.clear();
-
         searchField.sendKeys(searchText);
         searchField.sendKeys(Keys.ENTER);
     }
