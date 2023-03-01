@@ -1,7 +1,6 @@
 package tests;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -73,7 +72,8 @@ public class LoginTests extends BaseTest {
     @Test
     public void Logout() {
         loginPage.login(ADMINEMAIL, ADMINPASSWORD);
-        Assert.assertTrue(driver.findElement(By.className("btnLogout")).isDisplayed());
+
+        Assert.assertTrue(homePage.logoutOptionDisplayed());
         homePage.logoutUser();
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
 
@@ -84,7 +84,7 @@ public class LoginTests extends BaseTest {
     @AfterMethod
     public void afterMethod(Method method) {
         try {
-            if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
+            if (homePage.logoutOptionDisplayed()) {
                 homePage.logoutUser();
             }
         } catch (Exception NoSuchElementException) {

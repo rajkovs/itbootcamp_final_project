@@ -74,8 +74,8 @@ public class ProfileTests extends BaseTest {
     @AfterMethod
     public void afterMethod(Method method) {
         try {
-            if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
-                homePage.logoutUser();
+            if (myProfilePage.logoutOptionDisplayed()) {
+                myProfilePage.logoutUser();
             }
         } catch (Exception NoSuchElementException) {
             System.out.println(method.getName() + " afterMethod - logout:\nUser not signed in/no logout button found.");

@@ -14,6 +14,9 @@ public abstract class PublicPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/header/div/div[3]/a[4]")
     protected WebElement signUpToolbarOption;
 
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/aside/div[1]/div/a[4]/div[2]")
+    protected WebElement signUpMenuOption;
+
     @FindBy(className = "btnLocaleActivation")
     protected WebElement localeToolbarOption;
 
@@ -22,11 +25,21 @@ public abstract class PublicPage extends BasePage {
     }
 
     public void openLoginPage() {
-        loginToolbarOption.click();
+        if (hamburgerMenuDisplayed()) {
+            loginToolbarOption.click();
+        } else {
+            hamburgerMenu.click();
+            loginMenuOption.click();
+        }
     }
 
     public void openSignUpPage() {
-        signUpToolbarOption.click();
+        if (hamburgerMenuDisplayed()) {
+            signUpToolbarOption.click();
+        } else {
+            hamburgerMenu.click();
+            signUpMenuOption.click();
+        }
     }
 
     public void setLocaleToolbarOption(LocaleOptions chosenLocale) {

@@ -1,7 +1,6 @@
 package tests;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.AdminCitiesPage;
@@ -43,7 +42,7 @@ public class AdminCitiesTests extends BaseTest {
     @Test
     public void VisitAdminCitiesPageAndListCities() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
-        Assert.assertTrue(adminCitiesPage.logoutToolbarOptionDisplayed());
+        Assert.assertTrue(adminCitiesPage.logoutOptionDisplayed());
     }
 
     @Test
@@ -90,8 +89,8 @@ public class AdminCitiesTests extends BaseTest {
             System.out.println(method.getName() + " afterMethod - close message:\nNo close message/Close message button not found.");
         }
         try {
-            if (driver.findElement(By.className("btnLogout")).isDisplayed()) {
-                homePage.logoutUser();
+            if (adminCitiesPage.logoutOptionDisplayed()) {
+                adminCitiesPage.logoutUser();
             }
         } catch (Exception NoSuchElementException) {
             System.out.println(method.getName() + " afterMethod - logout:\nUser not signed in/no logout button found.");
